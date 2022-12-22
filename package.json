@@ -1,5 +1,5 @@
 {
-  "name": "cyber-bullying-server",
+  "name": "recipes-server",
   "version": "0.0.0",
   "description": "TypeScript + Mongoose + MongoDB + Express API Server",
   "author": "",
