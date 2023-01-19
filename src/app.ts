@@ -5,10 +5,10 @@ import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
-import { connect, set } from 'mongoose';
+import mongoose from 'mongoose';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
+import { NODE_ENV, PORT, LOG_FORMAT } from '@config';
 import { dbConnection } from '@databases';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
@@ -33,10 +33,10 @@ class App {
 
   public listen() {
     this.app.listen(this.port, () => {
-      logger.info(`=================================`);
-      logger.info(`======= ENV: ${this.env} =======`);
-      logger.info(`🚀 App listening on the port ${this.port}`);
-      logger.info(`=================================`);
+      logger.info(`====================================`);
+      logger.info(`========= ENV: ${this.env} =========`);
+      logger.info(`== App listening on the port ${this.port} ==`);
+      logger.info(`====================================`);
     });
   }
 
@@ -45,16 +45,25 @@ class App {
   }
 
   private connectToDatabase() {
-    if (this.env !== 'production') {
-      set('debug', true);
-    }
+    const db = mongoose.connection;
 
-    connect(dbConnection.url, dbConnection.options);
+    db.on('connected', () => {
+      console.log('DB connected!');
+    });
+    db.on('disconnected', () => {
+      console.log('DB disconnected! Trying to reconnect...');
+      mongoose.connect(dbConnection.url, dbConnection.options);
+    });
+    db.on('error', error => {
+      console.log('DB connection error : ' + error);
+    });
+
+    mongoose.connect(dbConnection.url, dbConnection.options); //.catch(error => console.log('DB connection error : ' + error));
   }
 
   private initializeMiddlewares() {
     this.app.use(morgan(LOG_FORMAT, { stream }));
-    this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
+    this.app.use(cors());
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(compression());
@@ -73,9 +82,9 @@ class App {
     const options = {
       swaggerDefinition: {
         info: {
-          title: 'REST API',
+          title: 'Cyber Bullying - REST API',
           version: '1.0.0',
-          description: 'Example docs',
+          description: 'Cyber Bullying Docs',
         },
       },
       apis: ['swagger.yaml'],

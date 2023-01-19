@@ -23,10 +23,10 @@ paths:
       parameters:
       - name: body
         in: body
-        description: user Data
+        description: create user dto
         required: true
         schema:
-          $ref: '#/definitions/users'
+          $ref: '#/definitions/create-user-dto'
       responses:
         201:
           description: 'Created'
@@ -68,10 +68,10 @@ paths:
         required: true
       - name: body
         in: body
-        description: user Data
+        description: update user dto
         required: true
         schema:
-          $ref: '#/definitions/users'
+          $ref: '#/definitions/update-user-dto'
       responses:
         200:
           description: 'OK'
@@ -102,19 +102,39 @@ paths:
 
 # definitions
 definitions:
-  users:
+  create-user-dto:
     type: object
     required:
-        - email
+        - nickname
         - password
+        - userType
     properties:
-      email:
+      nickname:
         type: string
-        description: user Email
+        description: user nickname
       password:
         type: string
-        description: user Password
+        description: user password
+      userType:
+        type: string
+        description: user type
 
+  update-user-dto:
+    type: object
+    required:
+      - nickname
+      - password
+      - userType
+    properties:
+      nickname:
+        type: string
+        description: user nickname
+      password:
+        type: string
+        description: user password
+      userType:
+        type: string
+        description: user type
 schemes:
  - https
  - http
