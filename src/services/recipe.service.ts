@@ -15,7 +15,7 @@ class RecipeService {
   public async findRecipeById(id: string): Promise<Recipe> {
     if (isEmpty(id)) throw new HttpException(400, 'id is empty');
 
-    const recipe: Recipe = await this.recipes.findOne({ id: id }); // todo validate 'id' || '_id'
+    const recipe: Recipe = await this.recipes.findOne({ _id: id.toString() }); // todo validate 'id' || '_id'
     if (!recipe) throw new HttpException(409, "Recipe doesn't exist");
 
     return recipe;
@@ -24,6 +24,7 @@ class RecipeService {
   public async createRecipe(createRecipeDto: CreateRecipeDto): Promise<Recipe> {
     if (isEmpty(createRecipeDto)) throw new HttpException(400, 'createUserDto is empty');
     return await this.recipes.create({
+      _id: Date.now().toString(),
       ...createRecipeDto,
     });
   }
