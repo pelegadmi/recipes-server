@@ -1,7 +1,7 @@
-import { RecipeResult } from '@interfaces/spoonacular/recipeResult.spoonacular.interface';
+import { Recipe } from '@interfaces/spoonacular/recipeResult.spoonacular.interface';
 
 export interface SpoonacularResponse {
-  results: Array<RecipeResult>;
+  results: Array<Recipe>;
   offset: number;
   number: number;
   totalResults: number;

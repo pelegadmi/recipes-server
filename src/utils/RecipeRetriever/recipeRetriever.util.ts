@@ -1,4 +1,4 @@
-import { RecipeResult } from '@interfaces/spoonacular/recipeResult.spoonacular.interface';
+import { Recipe } from '@interfaces/spoonacular/recipeResult.spoonacular.interface';
 
 const axios = require('axios');
 
@@ -16,7 +16,7 @@ class RecipeRetriever {
     // instructionsRequired = true,
     // fillIngredients = false,
     // addRecipeInformation = false,
-  ): Promise<Array<RecipeResult>> {
+  ): Promise<Array<Recipe>> {
     const options = {
       method: 'GET',
       url: 'https://api.spoonacular.com/recipes/complexSearch',
@@ -41,7 +41,7 @@ class RecipeRetriever {
 
     const response = await axios.request(options);
     const x = Array.from(response.data.results);
-    return x as Array<RecipeResult>;
+    return x as Array<Recipe>;
   }
 }
 
