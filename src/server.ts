@@ -1,9 +1,16 @@
 import App from './app';
 import UsersRoute from '@routes/users.route';
 import validateEnv from '@utils/validateEnv';
+import * as console from 'console';
 
-validateEnv();
+const main = async () => {
+  validateEnv();
 
-const app = new App([new UsersRoute()]);
+  const app = new App([new UsersRoute()]);
 
-app.listen();
+  app.listen();
+};
+
+main().then(() => {
+  console.log('server down.');
+});
