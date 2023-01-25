@@ -28,10 +28,10 @@ class RecipeService {
     });
   }
 
-  public async updateRecipe(id: string, createRecipeDto: CreateRecipeDto): Promise<User> {
+  public async updateRecipe(id: string, createRecipeDto: CreateRecipeDto): Promise<Recipe> {
     if (isEmpty(createRecipeDto)) throw new HttpException(400, 'createRecipeDto is empty');
 
-    const updateRecipeById: User = await this.recipes.findByIdAndUpdate(id, {
+    const updateRecipeById: Recipe = await this.recipes.findByIdAndUpdate(id, {
       ...createRecipeDto,
     });
 
