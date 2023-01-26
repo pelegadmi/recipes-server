@@ -3,7 +3,7 @@ import { Routes } from '@interfaces/routes.interface';
 import RecipesController from '@controllers/recipe.controller';
 
 class RecipesRoute implements Routes {
-  public path = '/recipe';
+  public path = '/recipes';
   public router = Router();
   public recipesController = new RecipesController();
 

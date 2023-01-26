@@ -24,7 +24,7 @@ class RecipeService {
   public async createRecipe(createRecipeDto: CreateRecipeDto): Promise<Recipe> {
     if (isEmpty(createRecipeDto)) throw new HttpException(400, 'createUserDto is empty');
     return await this.recipes.create({
-      _id: Date.now().toString(),
+      // _id: Date.now().toString(),
       ...createRecipeDto,
     });
   }

@@ -1,16 +1,16 @@
 import App from './app';
 import UsersRoute from '@routes/users.route';
 import validateEnv from '@utils/validateEnv';
-import * as console from 'console';
+import RecipesRoute from '@routes/recipe.route';
 
 const main = async () => {
   validateEnv();
 
-  const app = new App([new UsersRoute()]);
+  const app = new App([new UsersRoute(), new RecipesRoute()]);
 
   app.listen();
 };
 
 main().then(() => {
-  console.log('server down.');
+  // console.log('server up.');
 });
