@@ -2,6 +2,7 @@ import App from './app';
 import UsersRoute from '@routes/users.route';
 import validateEnv from '@utils/validateEnv';
 import RecipesRoute from '@routes/recipe.route';
+import updateRecipes from '@/hosted-service/updateRecipes.script';
 
 const main = async () => {
   validateEnv();
@@ -12,5 +13,5 @@ const main = async () => {
 };
 
 main().then(() => {
-  // console.log('server up.');
+  updateRecipes();
 });

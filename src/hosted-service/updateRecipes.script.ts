@@ -1,14 +1,10 @@
 import RecipeRetriever from '@utils/RecipeRetriever/recipeRetriever.util';
 import RecipeService from '@services/recipe.service';
 
-const delay = async (ms: number) => {
-  await new Promise(resolve => setTimeout(resolve, ms));
-};
+const updateRecipeQuery = (recipeQuery: string) => {
+  const recipeRetriever = new RecipeRetriever();
+  const recipeService = new RecipeService();
 
-const recipeRetriever = new RecipeRetriever();
-const recipeService = new RecipeService();
-
-const updateRecipes = (recipeQuery: string) => {
   recipeRetriever.retrieve(recipeQuery).then(recipes =>
     recipes.forEach(recipe => {
       recipeService
@@ -22,20 +18,14 @@ const updateRecipes = (recipeQuery: string) => {
     }),
   );
 };
-const main = () => {
-  const flag = true;
-  const dayInMilliseconds = 86400000;
 
-  while (flag) {
-    console.log('Recipes are being Updated');
+const updateRecipes = () => {
+  console.log('Recipes are being Updated');
 
-    updateRecipes('pasta');
-    updateRecipes('chicken');
+  updateRecipeQuery('pasta');
+  updateRecipeQuery('chicken');
 
-    console.log('Updated Successfully');
-
-    delay(dayInMilliseconds).then(() => console.log('process is being delayed for a day'));
-  }
+  console.log('Updated Successfully');
 };
 
-main();
+export default updateRecipes;
