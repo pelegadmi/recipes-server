@@ -40,8 +40,8 @@ class RecipeRetriever {
     };
 
     const response = await axios.request(options);
-    const x = Array.from(response.data.results);
-    return x as Array<Recipe>;
+    const results = Array.from(response.data.results);
+    return results as Array<Recipe>;
   }
 }
 

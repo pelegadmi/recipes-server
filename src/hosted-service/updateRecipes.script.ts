@@ -19,11 +19,10 @@ const updateRecipeQuery = (recipeQuery: string) => {
   );
 };
 
-const updateRecipes = () => {
+const updateRecipes = recipesQueries => {
   console.log('Recipes are being Updated');
 
-  updateRecipeQuery('pasta');
-  updateRecipeQuery('chicken');
+  recipesQueries.forEach(recipeQuery => updateRecipeQuery(recipeQuery));
 
   console.log('Updated Successfully');
 };
