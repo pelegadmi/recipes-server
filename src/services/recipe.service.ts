@@ -1,5 +1,4 @@
 import { HttpException } from '@exceptions/HttpException';
-import { User } from '@interfaces/users.interface';
 import { isEmpty } from '@utils/util';
 import recipeModel from '@models/recipe.model';
 import { Recipe } from '@interfaces/spoonacular/recipeResult.spoonacular.interface';

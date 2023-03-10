@@ -7,4 +7,6 @@ export class CreateRecipeDto {
   public image: string;
   @IsString()
   public imageType: string;
+  public maxReadyTime: number;
+  public includeIngredients: Array<string>;
 }

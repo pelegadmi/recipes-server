@@ -18,6 +18,14 @@ const recipeSchema: Schema = new Schema({
     type: String,
     require: true,
   },
+  maxReadyTime: {
+    type: Number,
+    require: true,
+  },
+  includeIngredients: {
+    type: Array<String>(),
+    require: true,
+  },
 });
 
 const recipeModel = model<Recipe & Document>('Recipe', recipeSchema);
