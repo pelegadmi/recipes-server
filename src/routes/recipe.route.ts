@@ -13,7 +13,7 @@ class RecipesRoute implements Routes {
 
   private initializeRoutes() {
     this.router.get(`${this.path}`, this.recipesController.getRecipes);
-    this.router.get(`${this.path}/:id`, this.recipesController.getRecipeById);
+    this.router.get(`${this.path}/:id`, this.recipesController.getRecipesByUserId);
     this.router.post(`${this.path}`, this.recipesController.createRecipe);
     this.router.put(`${this.path}/:id`, this.recipesController.updateRecipe);
     this.router.delete(`${this.path}/:id`, this.recipesController.deleteRecipe);
