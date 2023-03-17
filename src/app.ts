@@ -13,6 +13,9 @@ import { dbConnection } from '@databases';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
+import http from 'http';
+import { Server } from 'socket.io';
+import * as console from "console";
 
 class App {
   public app: express.Application;
@@ -28,6 +31,7 @@ class App {
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
     this.initializeSwagger();
+    this.initializeSocket();
     this.initializeErrorHandling();
   }
 
@@ -42,6 +46,25 @@ class App {
 
   public getServer() {
     return this.app;
+  }
+
+  private initializeSocket() {
+    const server = http.createServer(this.app);
+    const io = new Server(server, { cors: { origins: '*:*' } });
+    let userCounter = 0;
+    io.on('connection', socket => {
+      userCounter++;
+      io.emit('counter', userCounter);
+      console.log('client connected');
+      socket.on('disconnect', () => {
+        userCounter--;
+        io.emit('counter', userCounter);
+        console.log('client disconnected');
+      });
+    });
+    server.listen('8080', () => {
+      console.log(``);
+    });
   }
 
   private connectToDatabase() {
