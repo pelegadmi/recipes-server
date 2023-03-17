@@ -19,7 +19,7 @@ class RecipesController {
   public getRecipesByUserId = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const id: string = req.params.id;
-      const findOneRecipeData: Recipe[] = await this.recipeService.findRecipeById(id);
+      const findOneRecipeData: Recipe[] = await this.recipeService.findRecipesByUserId(id);
 
       res.status(200).json({ data: findOneRecipeData, message: 'findOne' });
     } catch (error) {

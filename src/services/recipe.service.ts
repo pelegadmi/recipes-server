@@ -11,10 +11,21 @@ class RecipeService {
     return this.recipes.find();
   }
 
-  public async findRecipeById(id: string): Promise<Recipe[]> {
+  public async findNumberOfRecipesPerUserId(): Promise<Recipe[]> {
+    return this.recipes.aggregate([
+      {
+        $group: {
+          _id: '$firebaseUserId',
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+  }
+
+  public async findRecipesByUserId(id: string): Promise<Recipe[]> {
     if (isEmpty(id)) throw new HttpException(400, 'id is empty');
 
-    const recipe: Recipe[] = await this.recipes.find({ firebaseUserId: id.toString() }); // todo validate 'id' || '_id'
+    const recipe: Recipe[] = await this.recipes.find({ firebaseUserId: id.toString() });
     if (!recipe) throw new HttpException(409, "Recipe doesn't exist");
 
     return recipe;
