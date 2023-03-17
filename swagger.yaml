@@ -240,6 +240,10 @@ definitions:
       - title
       - image
       - imageType
+      - includeIngredients
+      - maxReadyTime
+      - description
+      - firebaseUserId
     properties:
       title:
         type: string
@@ -250,6 +254,19 @@ definitions:
       imageType:
         type: string
         description: recipe imageType
+      includeIngredients:
+        type: array
+        items: {}
+        description: ingredient objects
+      maxReadyTime:
+        type: number
+        description: prep time
+      description:
+        type: string
+        description: description html block
+      firebaseUserId:
+        type: string
+        description: firebase's autogen id - important
 
 schemes:
  - https
