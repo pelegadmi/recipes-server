@@ -1,28 +1,24 @@
 import RecipeRetriever from '@utils/RecipeRetriever/recipeRetriever.util';
 import RecipeService from '@services/recipe.service';
 
-const updateRecipeQuery = (recipeQuery: string) => {
+const updateRecipeQuery = async (recipeQuery: string) => {
   const recipeRetriever = new RecipeRetriever();
   const recipeService = new RecipeService();
 
-  recipeRetriever.retrieve(recipeQuery).then(recipes =>
-    recipes.forEach(recipe => {
-      recipeService
-        .createRecipe(recipe)
-        .then(() => {
-          console.log('${recipeQuery} recipe added');
-        })
-        .then(() => {
-          console.log('${recipeQuery} recipe already exists');
-        });
-    }),
-  );
+  const recipes = await recipeRetriever.retrieveRecipes(recipeQuery);
+
+  for (const recipe of recipes) {
+    const recipeInfo = await recipeRetriever.retrieveRecipeInformation(recipe);
+    await recipeService.createRecipe(recipeInfo);
+  }
 };
 
-const updateRecipes = recipesQueries => {
+const updateRecipes = async recipesQueries => {
   console.log('Recipes are being Updated');
 
-  recipesQueries.forEach(recipeQuery => updateRecipeQuery(recipeQuery));
+  for (const recipeQuery of recipesQueries) {
+    await updateRecipeQuery(recipeQuery);
+  }
 
   console.log('Updated Successfully');
 };

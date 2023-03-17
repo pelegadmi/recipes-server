@@ -7,6 +7,11 @@ export class CreateRecipeDto {
   public image: string;
   @IsString()
   public imageType: string;
+  @IsString()
+  public includeIngredients: [];
   public maxReadyTime: number;
-  public includeIngredients: Array<string>;
+  @IsString()
+  public description: string;
+  @IsString()
+  public firebaseUserId: string;
 }

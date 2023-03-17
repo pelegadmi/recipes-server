@@ -23,7 +23,15 @@ const recipeSchema: Schema = new Schema({
     require: true,
   },
   includeIngredients: {
-    type: Array<String>(),
+    type: [],
+    require: true,
+  },
+  description: {
+    type: String,
+    require: true,
+  },
+  firebaseUserId: {
+    type: String,
     require: true,
   },
 });

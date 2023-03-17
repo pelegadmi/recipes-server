@@ -9,6 +9,7 @@ const recipesQueries = ['pasta', 'chicken', 'rice', 'pizza', 'soup', 'sushi', 'n
 const main = async () => {
   validateEnv();
 
+
   const app = new App([new UsersRoute(), new RecipesRoute()]);
 
   app.listen();

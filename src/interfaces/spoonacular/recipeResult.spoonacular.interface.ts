@@ -4,5 +4,7 @@ export interface Recipe {
   image: string;
   imageType: string;
   maxReadyTime: number;
-  includeIngredients: Array<string>;
+  includeIngredients: [];
+  description: string;
+  firebaseUserId: string;
 }
