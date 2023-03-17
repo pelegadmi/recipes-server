@@ -1,8 +1,23 @@
 tags:
-- name: users
-  description: users API
-
+  - name: users
+    description: users API
+  - name: recipes
+    description: recipes API
+  - name: graph
+    description: graph API
 paths:
+# [GET] graph
+  /graph:
+    get:
+      tags:
+        - graph
+      summery: Retrieve number of recipes per user
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
 # [GET] users
   /users:
     get:
