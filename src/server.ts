@@ -5,7 +5,7 @@ import RecipesRoute from '@routes/recipe.route';
 import updateRecipes from '@/hosted-service/updateRecipes.script';
 import GraphRoute from '@routes/graph.route';
 
-const recipesQueries = ['pasta', 'chicken', 'rice', 'pizza', 'soup', 'sushi', 'noodles'];
+const recipesQueries = ['pasta', 'chicken', 'rice', 'pizza', 'soup', 'sushi', 'noodles', 'fish', 'meat', 'hummus', 'shrimps', 'calamari'];
 
 const main = async () => {
   validateEnv();
