@@ -6,8 +6,13 @@ const updateRecipeQuery = async (recipeQuery: string) => {
   const recipeService = new RecipeService();
 
   const recipes = await recipeRetriever.retrieveRecipes(recipeQuery);
+  const mongoRecipes = await recipeService.findAllRecipes();
 
-  for (const recipe of recipes) {
+  const reducedRecipes = recipes.filter(
+    newlyRetrievedElement => !mongoRecipes.some(databaseElement => databaseElement.id === newlyRetrievedElement.id),
+  );
+
+  for (const recipe of reducedRecipes) {
     const recipeInfo = await recipeRetriever.retrieveRecipeInformation(recipe);
     await recipeService.createRecipe(recipeInfo);
   }
