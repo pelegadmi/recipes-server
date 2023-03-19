@@ -19,6 +19,7 @@ class RecipeRetriever {
       includeIngredients: response.data.extendedIngredients,
       maxReadyTime: response.data.readyInMinutes,
       description: response.data.summary,
+      firebaseUserId: 'DY6e4W8aHFMfSMBcDbv3FDBgdEm2',
     };
     return recipeInfo;
   }
