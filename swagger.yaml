@@ -5,7 +5,67 @@ tags:
     description: recipes API
   - name: graph
     description: graph API
+  - name: recipe-comments
+    description: recipe-comments API
+
 paths:
+# [GET] recipe-comments
+  /recipe-comments:
+    get:
+      tags:
+        - recipe-comments
+      summary: Find All Recipes' Comments
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+  # [GET] recipe-comments/id
+  /recipe-comments/{id}:
+    get:
+      tags:
+        - recipe-comments
+      summary: Find recipe's comments By Id
+      parameters:
+        - name: id
+          in: path
+          description: recipe Id
+          required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    # [POST] recipe-comments/id
+    post:
+      tags:
+        - recipe-comments
+      summary: add recipe comment
+      parameters:
+        - name: id
+          in: path
+          description: recipe Id
+          required: true
+        - name: body
+          in: body
+          description: create user dto
+          required: true
+          schema:
+            $ref: '#/definitions/comment-dto'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
 # [GET] graph
   /graph:
     get:
@@ -212,6 +272,8 @@ paths:
         500:
           description: 'Server Error'
 
+
+
 # definitions
 definitions:
   create-user-dto:
@@ -248,6 +310,14 @@ definitions:
         type: string
         description: user type
 
+  comment-dto:
+    type: object
+    required:
+      - x
+    properties:
+      x:
+        type: string
+        description: comment body
 
   create-recipe-dto:
     type: object
