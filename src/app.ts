@@ -15,7 +15,8 @@ import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
 import http from 'http';
 import { Server } from 'socket.io';
-import * as console from "console";
+import * as console from 'console';
+import SiteInfoService from '@services/siteInfo.service';
 
 class App {
   public app: express.Application;
@@ -33,6 +34,7 @@ class App {
     this.initializeSwagger();
     this.initializeSocket();
     this.initializeErrorHandling();
+    this.initializeSiteInfo();
   }
 
   public listen() {
@@ -46,6 +48,11 @@ class App {
 
   public getServer() {
     return this.app;
+  }
+  public async initializeSiteInfo() {
+    const siteInfoService = new SiteInfoService();
+    const siteInfo = await siteInfoService.initializeSiteInfo();
+    logger.info(`========= ENV: ${siteInfo.date} =========`);
   }
 
   private initializeSocket() {

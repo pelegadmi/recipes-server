@@ -7,6 +7,8 @@ tags:
     description: graph API
   - name: recipe-comments
     description: recipe-comments API
+  - name: site-info
+    description: site-info API
 
 paths:
 # [GET] recipe-comments
@@ -72,6 +74,17 @@ paths:
       tags:
         - graph
       summery: Retrieve number of recipes per user
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+# [GET] siteInfo
+  /site-info:
+    get:
+      tags:
+        - site-info
+      summery: Retrieve Site Info
       responses:
         200:
           description: 'OK'
