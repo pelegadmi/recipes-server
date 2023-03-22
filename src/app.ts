@@ -34,7 +34,7 @@ class App {
     this.initializeSwagger();
     this.initializeSocket();
     this.initializeErrorHandling();
-    this.initializeSiteInfo();
+    // this.initializeSiteInfo();
   }
 
   public listen() {
