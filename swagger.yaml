@@ -9,6 +9,8 @@ tags:
     description: recipe-comments API
   - name: site-info
     description: site-info API
+  - name: comment-count
+    description: comment-count API
 
 paths:
 # [GET] recipe-comments
@@ -79,6 +81,19 @@ paths:
           description: 'OK'
         500:
           description: 'Server Error'
+
+# [GET] comment-count
+  /comment-count:
+    get:
+      tags:
+        - comment-count
+      summery: Retrieve number of comments per recipe
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
 # [GET] siteInfo
   /site-info:
     get:

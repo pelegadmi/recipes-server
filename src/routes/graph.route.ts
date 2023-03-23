@@ -13,6 +13,7 @@ class GraphRoute implements Routes {
 
   private initializeRoutes() {
     this.router.get(`${this.path}`, this.graphController.getDictionary);
+    this.router.get(`/comment-count`, this.graphController.getCommentCountPerRecipe);
   }
 }
 
