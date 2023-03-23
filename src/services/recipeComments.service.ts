@@ -2,8 +2,6 @@ import { HttpException } from '@exceptions/HttpException';
 import { isEmpty } from '@utils/util';
 import recipeCommentModel from '@models/comment.model';
 import { RecipeComments } from '@interfaces/spoonacular/recipeComments.interface';
-import mongoose from 'mongoose';
-import { Recipe } from '@interfaces/spoonacular/recipeResult.spoonacular.interface';
 
 class RecipeCommentsService {
   public recipesComments = recipeCommentModel;
@@ -28,13 +26,13 @@ class RecipeCommentsService {
     });
   }
 
-  public async addComment(comment: {x: string}, recipeId: string): Promise<RecipeComments> {
+  public async addComment(comment: { x: string }, recipeId: string): Promise<RecipeComments> {
     if (isEmpty(comment)) throw new HttpException(400, 'comment is empty');
 
     try {
-      const recipeComment: RecipeComments = await this.findRecipeComments(recipeId);
+      const recipeComment = await this.findRecipeComments(recipeId);
       recipeComment.comments.push(comment.x);
-      return this.recipesComments.findByIdAndUpdate(recipeId, recipeComment);
+      return this.recipesComments.findByIdAndUpdate({ _id: recipeComment._id }, recipeComment, { new: true });
     } catch (_) {
       return await this.createRecipeComment({ id: recipeId, comments: new Array<string>(comment.x) });
     }
